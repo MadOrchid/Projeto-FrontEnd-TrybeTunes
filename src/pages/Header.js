@@ -32,7 +32,7 @@ class Header extends React.Component {
         <h1>Header</h1>
         { loading
           ? <Loading />
-          : <h2 data-testid="header-user-name"> {name}</h2> }
+          : <h2 data-testid="header-user-name">{name}</h2> }
       </header>
     );
   }
