@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Album from './pages/Album';
 import Favorites from './pages/Favorites';
 import Login from './pages/Login';
@@ -12,9 +12,9 @@ import Header from './pages/Header';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <BrowserRouter>
         <Header />
-        <BrowserRouter>
+        <Switch>
           <Route exact path="/" component={ Login } />
           <Route path="/search" component={ Search } />
           <Route path="/album/:id" component={ Album } />
@@ -22,8 +22,8 @@ class App extends React.Component {
           <Route path="/profile" component={ Profile } />
           <Route path="/profile/edit" component={ ProfileEdit } />
           <Route path="*" component={ NotFound } />
-        </BrowserRouter>
-      </div>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
