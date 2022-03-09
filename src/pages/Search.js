@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import Loading from './Loading';
+import Header from '../components/Header';
+import Loading from '../components/Loading';
 
 class Search extends React.Component {
   constructor() {
@@ -81,6 +82,7 @@ class Search extends React.Component {
     );
     return (
       <div data-testid="page-search">
+        <Header />
         <form className="hidden">
           <label htmlFor="artist-name">
             <input

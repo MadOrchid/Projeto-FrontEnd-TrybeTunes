@@ -24,14 +24,10 @@ class Header extends React.Component {
   }
 
   render() {
-    const {
-      name,
-      loading,
-    } = this.state;
-
+    const { name, loading } = this.state;
     const load = (
       <div>
-        <h2 data-testid="header-user-name">{name}</h2>
+        <h2 data-testid="header-user-name">{`Olá ${name}`}</h2>
         <Link to="/search" data-testid="link-to-search">Search</Link>
         <Link to="/favorites" data-testid="link-to-favorites">Favorites</Link>
         <Link to="/profile" data-testid="link-to-profile">Profile</Link>
@@ -39,8 +35,10 @@ class Header extends React.Component {
     );
     return (
       <header data-testid="header-component">
-
-        { loading ? <Loading /> : load }
+        <h1>Esse é o header</h1>
+        { loading
+          ? <Loading />
+          : load }
       </header>
     );
   }

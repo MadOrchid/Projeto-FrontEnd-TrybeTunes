@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import getMusics from '../services/musicsAPI';
 import MusicCard from './MusicCard';
+import Header from '../components/Header';
 
 class Album extends React.Component {
   constructor() {
@@ -27,6 +28,7 @@ class Album extends React.Component {
 
     return (
       <div data-testid="page-album">
+        <Header />
         { songs.map((song, index) => (
           index === 0 ? (
             <div key={ song.trackId }>

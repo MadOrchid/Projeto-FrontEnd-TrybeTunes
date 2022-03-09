@@ -1,71 +1,79 @@
 import React from 'react';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { createUser } from '../services/userAPI';
-import Loading from './Loading';
+import Loading from '../components/Loading';
 
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
       name: '',
-      buttonStatus: true,
-      loading: false,
+      disableBtn: true,
       loaded: false,
+      loading: false,
     };
-    this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleChange(type) {
-    const typeText = type.target.value;
-    const timeLegth = 3;
+  handleChange({ target: { name, value } }) {
+    const MIN_LETTERS = 3;
 
-    this.setState({ name: typeText });
-    return (typeText.length >= timeLegth)
-      ? this.setState({ buttonStatus: false })
-      : this.setState({ buttonStatus: true });
+    this.setState({ [name]: value });
+
+    return value.length >= MIN_LETTERS
+      ? this.setState({ disableBtn: false })
+      : this.setState({ disableBtn: true });
   }
 
-  handleClick(click) {
-    click.preventDefault();
-    this.setState({ loading: true });
+  handleClick() {
     const { name } = this.state;
-    createUser({ name }).then(() => this.setState({ loaded: true, loading: false }));
+
+    this.setState({ loading: true });
+    createUser({
+      name,
+      email: '',
+      image: '',
+      description: '',
+    }).then(() => this.setState({ loaded: true, loading: false }));
   }
 
   render() {
-    const {
-      buttonStatus,
-      loading,
-      loaded,
-    } = this.state;
-    const load = (
-      <div data-testid="page-login">
-        <form>
-          <label htmlFor="name-input">
-            <input
-              type="text"
-              name="name-input"
-              data-testid="login-name-input"
-              onChange={ this.handleChange }
-            />
-          </label>
-          <button
-            type="submit"
-            data-testid="login-submit-button"
-            onClick={ this.handleClick }
-            disabled={ buttonStatus }
-          >
-            Entrar
-          </button>
-        </form>
-      </div>
-    );
+    const { loaded, loading, name, disableBtn } = this.state;
     return (
-      <>
-        { loading ? <Loading /> : load }
-        { loaded && <Redirect to="/search" />}
-      </>
+      <div data-testid="page-login">
+        {loading
+          ? <Loading />
+          : (
+            <form className="login-form">
+              <div className="login-div">
+                <h1 className="login-h1">TrybeTunes</h1>
+                <h4 className="login-h4">Made By: João Spinelli</h4>
+              </div>
+              <div className="login-div">
+                <input
+                  className="login-input"
+                  data-testid="login-name-input"
+                  name="name"
+                  onChange={ this.handleChange }
+                  type="text"
+                  value={ name }
+                />
+
+                <button
+                  className="login-button"
+                  data-testid="login-submit-button"
+                  disabled={ disableBtn }
+                  onClick={ this.handleClick }
+                  type="button"
+                >
+                  Entrar
+                </button>
+              </div>
+            </form>
+          )}
+        { loaded && <Redirect to="/search" /> }
+      </div>
     );
   }
 }
