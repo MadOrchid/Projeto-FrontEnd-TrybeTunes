@@ -46,11 +46,10 @@ class Login extends React.Component {
           ? <Loading />
           : (
             <form className="login-form">
-              <div className="login-div">
-                <h1 className="login-h1">TrybeTunes</h1>
-                <h4 className="login-h4"> </h4>
+              <div>
+                <h1>TrybeTunes</h1>
               </div>
-              <div className="login-div">
+              <div>
                 <input
                   className="login-input"
                   data-testid="login-name-input"
