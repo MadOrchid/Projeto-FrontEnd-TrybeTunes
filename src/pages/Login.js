@@ -48,7 +48,7 @@ class Login extends React.Component {
             <form className="login-form">
               <div className="login-div">
                 <h1 className="login-h1">TrybeTunes</h1>
-                <h4 className="login-h4">Made By: João Spinelli</h4>
+                <h4 className="login-h4"> </h4>
               </div>
               <div className="login-div">
                 <input
